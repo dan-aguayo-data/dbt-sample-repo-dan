@@ -18,7 +18,7 @@ jobs:
           python-version: '3.12'  # Match your local version
 
       - name: Install dbt
-        run: pip install dbt-core dbt-snowflake
+        run: pip install dbt-snowflake==1.10.2
 
       - name: Run dbt debug
         env:
@@ -33,9 +33,9 @@ jobs:
           # Add UAT/prod vars if customized
         run: dbt debug --profiles-dir .
 
-      - name: Run dbt models
-        env:
-          # Repeat the env block above or use a matrix for targets
-          DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_SNOWFLAKE_ACCOUNT }}
-          # ... all others ...
-        run: dbt run --profiles-dir .  # Or --target uat/prod
+#      - name: Run dbt models
+#        env:
+#          # Repeat the env block above or use a matrix for targets
+#          DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_SNOWFLAKE_ACCOUNT }}
+#          # ... all others ...
+#        run: dbt run --profiles-dir .  # Or --target uat/prod
