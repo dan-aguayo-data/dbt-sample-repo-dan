@@ -1,0 +1,41 @@
+name: dbt CI
+
+on:
+  push:
+    branches: [main]  # Or use pull_request for PRs
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Or windows-latest if needed
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'  # Match your local version
+
+      - name: Install dbt
+        run: pip install dbt-core dbt-snowflake
+
+      - name: Run dbt debug
+        env:
+          DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_SNOWFLAKE_ACCOUNT }}
+          DBT_SNOWFLAKE_USER: ${{ secrets.DBT_SNOWFLAKE_USER }}
+          DBT_SNOWFLAKE_ROLE: ${{ secrets.DBT_SNOWFLAKE_ROLE }}
+          DBT_PRIVATE_KEY: ${{ secrets.DBT_PRIVATE_KEY }}
+          DBT_PRIVATE_KEY_PASSPHRASE: ${{ secrets.DBT_PRIVATE_KEY_PASSPHRASE }}
+          DBT_DATABASE_DEV: ${{ secrets.DBT_DATABASE_DEV }}
+          DBT_SCHEMA_DEV: ${{ secrets.DBT_SCHEMA_DEV }}
+          DBT_WAREHOUSE: ${{ secrets.DBT_WAREHOUSE }}
+          # Add UAT/prod vars if customized
+        run: dbt debug --profiles-dir .
+
+      - name: Run dbt models
+        env:
+          # Repeat the env block above or use a matrix for targets
+          DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_SNOWFLAKE_ACCOUNT }}
+          # ... all others ...
+        run: dbt run --profiles-dir .  # Or --target uat/prod
