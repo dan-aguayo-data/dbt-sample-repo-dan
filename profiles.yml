@@ -1,0 +1,37 @@
+raw:
+  target: dev  #default target
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
+      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
+      private_key: "{{ env_var('DBT_PRIVATE_KEY') }}"
+      private_key_passphrase: "{{ env_var('DBT_PRIVATE_KEY_PASSPHRASE') }}"
+      database: "{{ env_var('DBT_DATABASE_DEV') }}"
+      schema: "{{ env_var('DBT_SCHEMA_DEV') }}"
+      threads: 1
+      warehouse: "{{ env_var('DBT_WAREHOUSE') }}"
+    uat:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
+      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
+      private_key: "{{ env_var('DBT_PRIVATE_KEY') }}"
+      private_key_passphrase: "{{ env_var('DBT_PRIVATE_KEY_PASSPHRASE') }}"
+      database: "{{ env_var('DBT_DATABASE_DEV') }}"
+      schema: "{{ env_var('DBT_SCHEMA_DEV') }}"
+      threads: 1
+      warehouse: "{{ env_var('DBT_WAREHOUSE') }}"
+    prod:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
+      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
+      private_key: "{{ env_var('DBT_PRIVATE_KEY') }}"
+      private_key_passphrase: "{{ env_var('DBT_PRIVATE_KEY_PASSPHRASE') }}"
+      database: "{{ env_var('DBT_DATABASE_DEV') }}"
+      schema: "{{ env_var('DBT_SCHEMA_DEV') }}"
+      threads: 1
+      warehouse: "{{ env_var('DBT_WAREHOUSE') }}"
+
